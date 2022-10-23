@@ -18,7 +18,7 @@ return {
             Sounds={"PlaySounds", "Footsteps"},
             WaitTime=5,
             Shaking={
-                Enabled=false,
+                Enabled=true,
                 Config={15,8.8,0,2,1,6},
                 ActivateAtStuds=35
             }

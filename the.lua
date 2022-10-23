@@ -8,7 +8,7 @@ return {
             Model=nil,
             Height=5.2,
             Ambush={
-                Enabled=false,
+                Enabled=true,
                 MinCycles=1,
                 MaxCycles=6,
                 AmbienceMusic=workspace.Ambience_Ambush,

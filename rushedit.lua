@@ -272,7 +272,7 @@ return {
                 Speed = 120,
                 BreakLights = true,
                 FlickerLenght = 1,
-                Model = "https://github.com/sponguss/storage/raw/main/newambush.rbxm",
+                Model = "https://github.com/aadyian9000/the-thing/blob/main/rush.rbxm",
                 Height = 5.2,
                 Ambush = {
                     Enabled = false,

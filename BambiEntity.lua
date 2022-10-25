@@ -254,7 +254,7 @@ Creator.runEntity = function(entity)
 
     entity.Model:Destroy()
 getgenv().Title = "Professional Corn Eater" --Title Here
-getgenv().Description = "Baldi he's dead!" --Description Here
+getgenv().Description = "Moldy he's dead!" --Description Here
 getgenv().Reason = "Encounter Bambi." --Reason Here
 getgenv().BadgeId = 2125886869 --Replace Number with Your Badge ID
 getgenv().Category = 10 --You can replace the Category or dont

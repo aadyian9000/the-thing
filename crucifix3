@@ -273,8 +273,6 @@ Creator.runEntity = function(entity)
 
                         return
                         end
-                    else
-                    entity.Model:SetAttribute("StopMovement", false)
                     end
 
                     -- Killing

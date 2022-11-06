@@ -187,6 +187,7 @@ Creator.createEntity = function(config)
 end
 
 Creator.runEntity = function(entity)
+    print("todo")
     -- Obtain nodes
 
     local nodes = {}

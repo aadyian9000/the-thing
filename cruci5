@@ -252,7 +252,7 @@ Creator.runEntity = function(entity)
                     if Char:FindFirstChild("Crucifix") then
                             print("dafunny")
                         --Connections[entity.Model].Movement:Disconnect()
-                        entity.Model:SetAttribute("StopMovement", true)
+                        entity.Config.Speed = 0
 
                         -- Repent
 
@@ -267,7 +267,7 @@ Creator.runEntity = function(entity)
                         end
                         
                         game.workspace["US_VK"]:WaitForChild("Crucifix").Unequipped:Connect(function()
-                        entity.Model:SetAttribute("StopMovement", false)
+                        entity.Config.Speed = 0
                         end)
                         
                         if workspace:WaitForChild("Handle") then
@@ -279,12 +279,12 @@ Creator.runEntity = function(entity)
                         end
                         print("bruhhhhhh")
                             if not Char:FindFirstChild("Crucifix") then
-                                entity.Model:SetAttribute("StopMovement", false)
+                                entity.Config.Speed = 0
                                 print("d")
                                 end
                         return
                     else
-                    entity.Model:SetAttribute("StopMovement", false)
+                    entity.Config.Speed = 0
                     end
 
                     -- Killing

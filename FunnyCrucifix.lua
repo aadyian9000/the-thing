@@ -268,7 +268,7 @@ Creator.runEntity = function(entity)
                             drag(entity.Model, nodes[i].Position + Vector3.new(0, 3.5 + entity.Config.HeightOffset, 0), entity.Config.Speed)
                         end
 
-                        destroy(entity)
+                        --destroy(entity)
 
                         return
                     end
@@ -366,7 +366,7 @@ Creator.runEntity = function(entity)
 
     -- Remove entity after cycles
 
-    --destroy(entity)
+    destroy(entity)
 end
 
 Creator.runJumpscare = function(config)

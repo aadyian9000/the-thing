@@ -273,7 +273,11 @@ Creator.runEntity = function(entity)
                         --destroy(entity)
                         end
                         print("bruhhhhhh")
-                        --return
+                            if not Char:FindFirstChild("Crucifix") then
+                                entity.Model:SetAttribute("StopMovement", false)
+                                print("d")
+                                end
+                        return
                     else
                     entity.Model:SetAttribute("StopMovement", false)
                     end

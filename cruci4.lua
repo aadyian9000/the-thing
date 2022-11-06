@@ -272,8 +272,8 @@ Creator.runEntity = function(entity)
 
                         --destroy(entity)
                         end
-
-                        return
+                        print("bruhhhhhh")
+                        --return
                     else
                     entity.Model:SetAttribute("StopMovement", false)
                     end

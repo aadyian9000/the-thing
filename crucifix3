@@ -263,13 +263,13 @@ Creator.runEntity = function(entity)
                                 nodeIdx, nearest = i, dist
                             end
                         end
-                        if workspace:FindFirstChild("Handle") then
+                        if workspace:WaitForChild("Handle") then
                         for i = nodeIdx, 1, -1 do
                             drag(entity.Model, nodes[i].Position + Vector3.new(0, 3.5 + entity.Config.HeightOffset, 0), entity.Config.Speed)
                          end
                        end
 
-                        --destroy(entity)
+                        destroy(entity)
 
                         return
                     end

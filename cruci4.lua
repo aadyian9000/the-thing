@@ -249,6 +249,7 @@ Creator.runEntity = function(entity)
                     -- Crucifix (lol)
                     
                     if Char:FindFirstChild("Crucifix") then
+                            print("dafunny")
                         Connections[entity.Model].Movement:Disconnect()
                         entity.Model:SetAttribute("StopMovement", true)
 
@@ -364,7 +365,7 @@ Creator.runEntity = function(entity)
         
         entity.Debug.OnEntityFinishedRebound(entity)
 
-        task.wait(cycles.WaitTime or 0)
+        if not entity.Model:GetAttribute("StopMovement") then task.wait(cycles.WaitTime or 0) end
     end
 
     -- Remove entity after cycles

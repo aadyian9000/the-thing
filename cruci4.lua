@@ -268,9 +268,9 @@ Creator.runEntity = function(entity)
                         for i = nodeIdx, 1, -1 do
                             drag(entity.Model, nodes[i].Position + Vector3.new(0, 3.5 + entity.Config.HeightOffset, 0), entity.Config.Speed)
                          end
-                       end
 
                         --destroy(entity)
+                        end
 
                         return
                     else

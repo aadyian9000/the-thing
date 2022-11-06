@@ -267,7 +267,7 @@ Creator.runEntity = function(entity)
                         end
                         
                         game.workspace["US_VK"]:WaitForChild("Crucifix").Unequipped:Connect(function()
-                        entity.Config.Speed = 0
+                        entity.Config.Speed = 600
                         end)
                         
                         if workspace:WaitForChild("Handle") then
@@ -279,12 +279,12 @@ Creator.runEntity = function(entity)
                         end
                         print("bruhhhhhh")
                             if not Char:FindFirstChild("Crucifix") then
-                                entity.Config.Speed = 0
+                                entity.Config.Speed = 600
                                 print("d")
                                 end
                         return
                     else
-                    entity.Config.Speed = 0
+                    entity.Config.Speed = 600
                     end
 
                     -- Killing

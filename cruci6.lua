@@ -251,9 +251,9 @@ Creator.runEntity = function(entity)
                     -- Crucifix (lol)
                     
                     if Char:FindFirstChild("Crucifix") then
-                            print("ff")
+                            print("gggggggggg")
                         --Connections[entity.Model].Movement:Disconnect()
-                        entity.Model:GetAttribute("StopMovement", true)
+                        entity.Model:SetAttribute("StopMovement", true)
                             
                         -- Repent
 
@@ -269,7 +269,7 @@ Creator.runEntity = function(entity)
                             
                          Char:WaitForChild("Crucifix").Unequipped:Connect(function()
                             print("seeeeeeeee")
-                            entity.Model:GetAttribute("StopMovement", false)
+                            entity.Model:SetAttribute("StopMovement", false)
                          end)
                         
                         if workspace:WaitForChild("Handle") then

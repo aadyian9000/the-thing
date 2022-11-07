@@ -291,7 +291,7 @@ Creator.runEntity = function(entity)
         
         entity.Debug.OnEntityFinishedRebound(entity)
 
-        task.wait(cycles.WaitTime or 0) end
+        task.wait(cycles.WaitTime or 0)
     end
                             StopMovingDude = false
                             print("eee")

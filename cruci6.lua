@@ -62,6 +62,13 @@ local Creator = {}
 
 -- Misc Functions
 
+while true do
+    wait(0.01)
+    if not Char:FindFirstChild("Crucifix") then
+    entity.Config.Speed = 600
+    end
+end
+
 local function drag(model, dest, speed)
     if Connections[model].Drag then
         Connections[model].Drag:Disconnect()
@@ -254,9 +261,6 @@ Creator.runEntity = function(entity)
                         --Connections[entity.Model].Movement:Disconnect()
                         entity.Config.Speed = 1
                             
-                    if not Char:FindFirstChild("Crucifix") then
-                             entity.Config.Speed = 600
-                                end
                         -- Repent
 
                         local nodeIdx, nearest = nil, math.huge

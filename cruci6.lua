@@ -253,7 +253,7 @@ Creator.runEntity = function(entity)
                     -- Crucifix (lol)
                     
                     if Char:FindFirstChild("Crucifix") then
-                            print("Wharr")
+                            print("Shhhhhhhh")
                         --Connections[entity.Model].Movement:Disconnect()
                         StopMovingDude = true
                             

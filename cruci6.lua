@@ -270,6 +270,29 @@ Creator.runEntity = function(entity)
                         end
                             
                          Char:WaitForChild("Crucifix").Unequipped:Connect(function()
+                                        for cycle = 1, math.random(cycles.Min, cycles.Max) do
+        for i = 1, #nodes, 1 do
+            if not StopMovingDude then
+                if entity.Config.BreakLights then
+                    ModuleScripts.ModuleEvents.breakLights(nodes[i].Parent.Parent)
+                end
+    
+                drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)
+            end
+        end
+
+        if cycles.Max > 1 then
+            for i = #nodes, 1, -1 do
+                if not StopMovingDude then
+                    drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)
+                end
+            end
+        end
+        
+        entity.Debug.OnEntityFinishedRebound(entity)
+
+        task.wait(cycles.WaitTime or 0)
+    end
                             StopMovingDude = false
                             print("eee")
                             --drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)

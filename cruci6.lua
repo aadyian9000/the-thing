@@ -270,6 +270,7 @@ Creator.runEntity = function(entity)
                         end
                             
                          Char:WaitForChild("Crucifix").Unequipped:Connect(function()
+                                        local cycles = entity.Config.Cycles
                                         for cycle = 1, math.random(cycles.Min, cycles.Max) do
         for i = 1, #nodes, 1 do
             if not StopMovingDude then

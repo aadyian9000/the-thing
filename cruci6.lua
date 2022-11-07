@@ -375,7 +375,7 @@ Creator.runEntity = function(entity)
         
         entity.Debug.OnEntityFinishedRebound(entity)
 
-        if not entity.Model:GetAttribute("StopMovement") then task.wait(cycles.WaitTime or 0) end
+        if not StopMovingDude then task.wait(cycles.WaitTime or 0) end
     end
 
     -- Remove entity after cycles

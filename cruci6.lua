@@ -188,12 +188,7 @@ end
 
 Creator.runEntity = function(entity)
     print("todo")
-    while true do
-    wait(0.01)
-    if not Char:FindFirstChild("Crucifix") then
-    entity.Config.Speed = 600
-    end
-end
+    
     -- Obtain nodes
 
     local nodes = {}
@@ -271,6 +266,10 @@ end
                                 nodeIdx, nearest = i, dist
                             end
                         end
+                            
+                         if not Char:FindFirstChild("Crucifix") then
+                            entity.Config.Speed = 600
+                                end
                         
                         if workspace:WaitForChild("Handle") then
                         for i = nodeIdx, 1, -1 do

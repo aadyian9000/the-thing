@@ -268,7 +268,8 @@ Creator.runEntity = function(entity)
                         end
                             
                          Char:WaitForChild("Crucifix").Unequipped:Connect(function()
-                            print("seeeeeeeee")
+                            print("eee")
+                            drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)
                             entity.Model:SetAttribute("StopMovement", false)
                          end)
                         

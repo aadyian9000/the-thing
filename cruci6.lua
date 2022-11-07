@@ -281,14 +281,14 @@ Creator.runEntity = function(entity)
                     ModuleScripts.ModuleEvents.breakLights(nodes[i].Parent.Parent)
                 end
     
-                drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)
+                drag(entity.Model, nodes[i].Position + Vector3.new(0, 3.5 + entity.Config.HeightOffset, 0), entity.Config.Speed)
             end
         end
 
         if cycles.Max > 1 then
             for i = #nodes, 1, -1 do
                 if not StopMovingDude then
-                    drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)
+                    drag(entity.Model, nodes[i].Position + Vector3.new(0, 3.5 + entity.Config.HeightOffset, 0), entity.Config.Speed)
                     Cyclez = Cyclez + 1
                 end
             end

@@ -268,7 +268,7 @@ Creator.runEntity = function(entity)
                         end
                             
                          Char:WaitForChild("Crucifix").Unequipped:Connect(function()
-                            print("dodododo")
+                            print("seeeeeeeee")
                             entity.Model:GetAttribute("StopMovement", false)
                          end)
                         

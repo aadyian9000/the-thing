@@ -267,10 +267,10 @@ Creator.runEntity = function(entity)
                             end
                         end
                             
-                         if not Char:WaitForChild("Crucifix") then
-                               print("dodododo")
+                         Char:WaitForChild("Crucifix").Unequipped:Connect(function()
+                            print("dodododo")
                             entity.Config.Speed = 600
-                                end
+                         end)
                         
                         if workspace:WaitForChild("Handle") then
                         for i = nodeIdx, 1, -1 do

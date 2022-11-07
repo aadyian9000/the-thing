@@ -300,7 +300,7 @@ Creator.runEntity = function(entity)
         task.wait(cycles.WaitTime or 0)
     end
                             StopMovingDude = false
-                            print("eee")
+                            print("ddd")
                             --drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)
                             --entity.Model:SetAttribute("StopMovement", false)
                          end)

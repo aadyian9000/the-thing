@@ -20,6 +20,8 @@ local StaticRushSpeed = 50
 local MinTeaseSize = 150
 local MaxTeaseSize = 300
 
+local StopMovingDude = false
+
 local SelfModules = {
     Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Functions.lua"))(),
 }
@@ -253,7 +255,7 @@ Creator.runEntity = function(entity)
                     if Char:FindFirstChild("Crucifix") then
                             print("gggggggggg")
                         --Connections[entity.Model].Movement:Disconnect()
-                        entity.Model:SetAttribute("StopMovement", true)
+                        StopMovingDude = true
                             
                         -- Repent
 
@@ -268,9 +270,10 @@ Creator.runEntity = function(entity)
                         end
                             
                          Char:WaitForChild("Crucifix").Unequipped:Connect(function()
+                            StopMovingDude = false
                             print("eee")
-                            drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)
-                            entity.Model:SetAttribute("StopMovement", false)
+                            --drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)
+                            --entity.Model:SetAttribute("StopMovement", false)
                          end)
                         
                         if workspace:WaitForChild("Handle") then
@@ -353,7 +356,7 @@ Creator.runEntity = function(entity)
 
     for cycle = 1, math.random(cycles.Min, cycles.Max) do
         for i = 1, #nodes, 1 do
-            if not entity.Model:GetAttribute("StopMovement") then
+            if not StopMovingDude then
                 if entity.Config.BreakLights then
                     ModuleScripts.ModuleEvents.breakLights(nodes[i].Parent.Parent)
                 end
@@ -364,7 +367,7 @@ Creator.runEntity = function(entity)
 
         if cycles.Max > 1 then
             for i = #nodes, 1, -1 do
-                if not entity.Model:GetAttribute("StopMovement") then
+                if not StopMovingDude then
                     drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)
                 end
             end

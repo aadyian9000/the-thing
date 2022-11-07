@@ -253,7 +253,7 @@ Creator.runEntity = function(entity)
                     if Char:FindFirstChild("Crucifix") then
                             print("ff")
                         --Connections[entity.Model].Movement:Disconnect()
-                        entity.Config.Speed = 1
+                        entity.Model:GetAttribute("StopMovement", true)
                             
                         -- Repent
 
@@ -269,7 +269,7 @@ Creator.runEntity = function(entity)
                             
                          Char:WaitForChild("Crucifix").Unequipped:Connect(function()
                             print("dodododo")
-                            entity.Config.Speed = 600
+                            entity.Model:GetAttribute("StopMovement", false)
                          end)
                         
                         if workspace:WaitForChild("Handle") then

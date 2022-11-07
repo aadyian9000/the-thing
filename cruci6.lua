@@ -267,7 +267,8 @@ Creator.runEntity = function(entity)
                             end
                         end
                             
-                         if not Char:FindFirstChild("Crucifix") then
+                         if not Char:WaitForChild("Crucifix") then
+                               print("dodododo")
                             entity.Config.Speed = 600
                                 end
                         

@@ -253,7 +253,10 @@ Creator.runEntity = function(entity)
                             print("no")
                         --Connections[entity.Model].Movement:Disconnect()
                         entity.Config.Speed = 1
-
+                            
+                    if not Char:FindFirstChild("Crucifix") then
+                             entity.Config.Speed = 600
+                                end
                         -- Repent
 
                         local nodeIdx, nearest = nil, math.huge
@@ -266,10 +269,6 @@ Creator.runEntity = function(entity)
                             end
                         end
                         
-                        game.workspace["US_VK"]:WaitForChild("Crucifix").Unequipped:Connect(function()
-                        entity.Config.Speed = 600
-                        end)
-                        
                         if workspace:WaitForChild("Handle") then
                         for i = nodeIdx, 1, -1 do
                             drag(entity.Model, nodes[i].Position + Vector3.new(0, 3.5 + entity.Config.HeightOffset, 0), entity.Config.Speed)
@@ -278,13 +277,7 @@ Creator.runEntity = function(entity)
                         --destroy(entity)
                         end
                         print("bruhhhhhh")
-                            if not Char:FindFirstChild("Crucifix") then
-                                entity.Config.Speed = 600
-                                print("d")
-                                end
                         return
-                    else
-                    entity.Config.Speed = 600
                     end
 
                     -- Killing

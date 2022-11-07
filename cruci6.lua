@@ -270,6 +270,11 @@ Creator.runEntity = function(entity)
                         end
                             
                          Char:WaitForChild("Crucifix").Unequipped:Connect(function()
+            for i = #nodes, 1, -1 do
+                if not StopMovingDude then
+                    drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)
+                end
+            end
                             StopMovingDude = false
                             print("eee")
                             --drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)
@@ -375,7 +380,7 @@ Creator.runEntity = function(entity)
         
         entity.Debug.OnEntityFinishedRebound(entity)
 
-        --if not entity.Model:GetAttribute("StopMovement") then task.wait(cycles.WaitTime or 0) end
+        if not StopMovingDude then task.wait(cycles.WaitTime or 0) end
     end
 
     -- Remove entity after cycles

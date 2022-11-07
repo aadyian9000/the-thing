@@ -253,7 +253,7 @@ Creator.runEntity = function(entity)
                     -- Crucifix (lol)
                     
                     if Char:FindFirstChild("Crucifix") then
-                            print("Shhhhhhhh")
+                            print("Dublew")
                         --Connections[entity.Model].Movement:Disconnect()
                         StopMovingDude = true
                             
@@ -271,9 +271,7 @@ Creator.runEntity = function(entity)
                             
                          Char:WaitForChild("Crucifix").Unequipped:Connect(function()
             for i = #nodes, 1, -1 do
-                if not StopMovingDude then
                     drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)
-                end
             end
                             StopMovingDude = false
                             print("eee")

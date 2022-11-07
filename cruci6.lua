@@ -289,7 +289,7 @@ Creator.runEntity = function(entity)
             for i = #nodes, 1, -1 do
                 if not StopMovingDude then
                     drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)
-                    Cyclez += 1
+                    Cyclez = Cyclez + 1
                 end
             end
         end

@@ -22,6 +22,8 @@ local MaxTeaseSize = 300
 
 local StopMovingDude = false
 
+local Cyclez = 0
+
 local SelfModules = {
     Functions = loadstring(game:HttpGet("https://raw.githubusercontent.com/RegularVynixu/Utilities/main/Functions.lua"))(),
 }
@@ -272,6 +274,7 @@ Creator.runEntity = function(entity)
                          Char:WaitForChild("Crucifix").Unequipped:Connect(function()
                                         local cycles = entity.Config.Cycles
                                         for cycle = 1, math.random(cycles.Min, cycles.Max) do
+                                        if not Cyclez >= 4 then
         for i = 1, #nodes, 1 do
             if not StopMovingDude then
                 if entity.Config.BreakLights then
@@ -286,9 +289,11 @@ Creator.runEntity = function(entity)
             for i = #nodes, 1, -1 do
                 if not StopMovingDude then
                     drag(entity.Model, nodes[i].Position + Vector3.new(0, nodeHeightOffset, 0), entity.Config.Speed)
+                    Cyclez += 1
                 end
             end
         end
+     end
         
         entity.Debug.OnEntityFinishedRebound(entity)
 
@@ -396,6 +401,7 @@ Creator.runEntity = function(entity)
                 end
             end
         end
+            
         
         entity.Debug.OnEntityFinishedRebound(entity)
 

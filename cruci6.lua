@@ -274,7 +274,7 @@ Creator.runEntity = function(entity)
                          Char:WaitForChild("Crucifix").Unequipped:Connect(function()
                                         local cycles = entity.Config.Cycles
                                         for cycle = 1, math.random(cycles.Min, cycles.Max) do
-                                        if not Cyclez >= 4 then
+                                        if Cyclez <= 4 then
         for i = 1, #nodes, 1 do
             if not StopMovingDude then
                 if entity.Config.BreakLights then

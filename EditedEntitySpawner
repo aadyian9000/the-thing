@@ -267,7 +267,7 @@ Creator.runEntity = function(entity)
                     local doggo = workspace:FindFirstChild("Doggo")
                     local crucifix = Char:FindFirstChild("Crucifix")
                     
-                    if doggo or crucifix then
+                    if doggo or game.Workspace:FindFirstChild("Handle") then
                         Connections[entity.Model].Movement:Disconnect()
                         Connections[entity.Model].Drag:Disconnect()
                         entity.Model:SetAttribute("StopMovement", true)

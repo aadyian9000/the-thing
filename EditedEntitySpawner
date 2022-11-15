@@ -274,10 +274,9 @@ Creator.runEntity = function(entity)
 
                         if doggo then
                             doggo.Growl:Play()
-                            
-                            -- Repent
-
-                            local nodeIdx, nearest = nil, math.huge
+                            return
+                        end
+                        local nodeIdx, nearest = nil, math.huge
 
                             for i, v in next, nodes do
                                 local dist = (v.Position - entityPos).Magnitude
@@ -292,9 +291,6 @@ Creator.runEntity = function(entity)
                             end
 
                             destroy(entity)
-
-                            return
-                        end
                     end
 
                     -- Killing

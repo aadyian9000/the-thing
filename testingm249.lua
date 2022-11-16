@@ -1,73 +1,3 @@
-local Tool = game.Workspace[game.Players.LocalPlayer.Name]:WaitForChild("M249") -- i know lolcat im sorry i used this technique of getting player's character.
-
-local firing = false
-local cframey = CFrame.new(0,-1,0)
-function fire()
-	cam = game.Workspace.CurrentCamera
-	local cam_rot = cam.CoordinateFrame - cam.CoordinateFrame.p
-	local cam_scroll = (cam.CoordinateFrame.p - cam.Focus.p).magnitude
-	local ncf = CFrame.new(cam.Focus.p)*cam_rot*CFrame.fromEulerAnglesXYZ(0.01, 0.01, 0)
-	cam.CoordinateFrame = ncf*CFrame.new(0, 0, cam_scroll)
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.FlashFX.Enabled = true
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.ParticleEmitter.Enabled = true
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.ParticleEmitter2.Enabled = true
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.Handle.Fire:Play()
-	cframey = CFrame.new(0,-1,0.2)
-	wait(0.02)
-	local cam_rot = cam.CoordinateFrame - cam.CoordinateFrame.p
-	local cam_scroll = (cam.CoordinateFrame.p - cam.Focus.p).magnitude
-	local ncf = CFrame.new(cam.Focus.p)*cam_rot*CFrame.fromEulerAnglesXYZ(0.01, -0.01, 0)
-	cam.CoordinateFrame = ncf*CFrame.new(0, 0, cam_scroll)
-	cframey = CFrame.new(0,-1,0.1)
-	wait(0.02)
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.FlashFX.Enabled = false
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.ParticleEmitter.Enabled = false
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.ParticleEmitter2.Enabled = false
-	cframey = CFrame.new(0,-1,0)
-end
-function nofiar(mouse)
-	firing = false
-end
-script.Parent.Activated:Connect(function()
-	firing = true
-	while firing == true do
-		wait()
-		fire()
-	end
-end)
-
-function onEquippedThingy(mouse)
-	if mouse == nil then
-		print("Mouse not found")
-		return 
-	end
-	mouse.Button1Up:connect(function() nofiar(mouse) end)
-end
-
-script.Parent.Equipped:Connect(function()
-	local run = game:GetService("RunService")
-	local cam = game.Workspace.CurrentCamera
-	local arms = game.ReplicatedStorage:WaitForChild("Arms"):Clone()
-	local plr = game.Players.LocalPlayer
-
-	--plr.CameraMode = Enum.CameraMode.LockFirstPerson
-
-	arms.Parent = cam
-
-	run.RenderStepped:Connect(function()
-
-		arms:SetPrimaryPartCFrame(cam.CFrame*cframey)
-
-	end)
-end)
-script.Parent.Unequipped:Connect(function()
-	game.Workspace.CurrentCamera:WaitForChild("Arms"):Destroy()
-	nofiar()
-end)
-Tool.Equipped:connect(onEquippedThingy)
-Tool.Equipped:Connect(function()
-	nofiar()
-end)
 -- Services
 
 local Players = game:GetService("Players")
@@ -254,5 +184,74 @@ local confirmConnection; confirmConnection = Plr.PlayerGui.MainUI.ItemShop.Confi
 		end
 	end--]]
 end)
+local Tool = game.Workspace[game.Players.LocalPlayer.Name]:WaitForChild("M249") -- i know lolcat im sorry i used this technique of getting player's character.
 
+local firing = false
+local cframey = CFrame.new(0,-1,0)
+function fire()
+	cam = game.Workspace.CurrentCamera
+	local cam_rot = cam.CoordinateFrame - cam.CoordinateFrame.p
+	local cam_scroll = (cam.CoordinateFrame.p - cam.Focus.p).magnitude
+	local ncf = CFrame.new(cam.Focus.p)*cam_rot*CFrame.fromEulerAnglesXYZ(0.01, 0.01, 0)
+	cam.CoordinateFrame = ncf*CFrame.new(0, 0, cam_scroll)
+	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.FlashFX.Enabled = true
+	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.ParticleEmitter.Enabled = true
+	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.ParticleEmitter2.Enabled = true
+	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.Handle.Fire:Play()
+	cframey = CFrame.new(0,-1,0.2)
+	wait(0.02)
+	local cam_rot = cam.CoordinateFrame - cam.CoordinateFrame.p
+	local cam_scroll = (cam.CoordinateFrame.p - cam.Focus.p).magnitude
+	local ncf = CFrame.new(cam.Focus.p)*cam_rot*CFrame.fromEulerAnglesXYZ(0.01, -0.01, 0)
+	cam.CoordinateFrame = ncf*CFrame.new(0, 0, cam_scroll)
+	cframey = CFrame.new(0,-1,0.1)
+	wait(0.02)
+	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.FlashFX.Enabled = false
+	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.ParticleEmitter.Enabled = false
+	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.ParticleEmitter2.Enabled = false
+	cframey = CFrame.new(0,-1,0)
+end
+function nofiar(mouse)
+	firing = false
+end
+script.Parent.Activated:Connect(function()
+	firing = true
+	while firing == true do
+		wait()
+		fire()
+	end
+end)
+
+function onEquippedThingy(mouse)
+	if mouse == nil then
+		print("Mouse not found")
+		return 
+	end
+	mouse.Button1Up:connect(function() nofiar(mouse) end)
+end
+
+script.Parent.Equipped:Connect(function()
+	local run = game:GetService("RunService")
+	local cam = game.Workspace.CurrentCamera
+	local arms = game.ReplicatedStorage:WaitForChild("Arms"):Clone()
+	local plr = game.Players.LocalPlayer
+
+	--plr.CameraMode = Enum.CameraMode.LockFirstPerson
+
+	arms.Parent = cam
+
+	run.RenderStepped:Connect(function()
+
+		arms:SetPrimaryPartCFrame(cam.CFrame*cframey)
+
+	end)
+end)
+script.Parent.Unequipped:Connect(function()
+	game.Workspace.CurrentCamera:WaitForChild("Arms"):Destroy()
+	nofiar()
+end)
+Tool.Equipped:connect(onEquippedThingy)
+Tool.Equipped:Connect(function()
+	nofiar()
+end)
 return CustomShop

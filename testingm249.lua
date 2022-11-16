@@ -1,3 +1,5 @@
+local Gunz = game:GetObjects("rbxassetid://11576003350")[1]
+
 -- Services
 
 local Players = game:GetService("Players")
@@ -172,7 +174,6 @@ end))
 local confirmConnection; confirmConnection = Plr.PlayerGui.MainUI.ItemShop.Confirm.MouseButton1Down:Connect(function()
 	confirmConnection:Disconnect()
 	
-	local Gunz = game:GetObjects("rbxassetid://11576003350")[1]
 	Gunz.Arms.Parent = game.ReplicatedStorage
 	Gunz.M249.Parent = Plr.Backpack
 	Gunz:Destroy()
@@ -184,7 +185,7 @@ local confirmConnection; confirmConnection = Plr.PlayerGui.MainUI.ItemShop.Confi
 		end
 	end--]]
 end)
-local Tool = game.Workspace[game.Players.LocalPlayer.Name]:WaitForChild("M249") -- i know lolcat im sorry i used this technique of getting player's character.
+local Tool = Gunz.M249 -- i know lolcat im sorry i used this technique of getting player's character.
 
 local firing = false
 local cframey = CFrame.new(0,-1,0)

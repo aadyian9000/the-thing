@@ -175,6 +175,7 @@ local confirmConnection; confirmConnection = Plr.PlayerGui.MainUI.ItemShop.Confi
 	confirmConnection:Disconnect()
 	
 	Gunz.Arms.Parent = game.ReplicatedStorage
+        Gunz.M249.TextureId = "rbxassetid://10889297548"
 	Gunz.M249.Parent = Plr.Backpack
 	Gunz:Destroy()
 	

@@ -215,7 +215,7 @@ end
 function nofiar(mouse)
 	firing = false
 end
-script.Parent.Activated:Connect(function()
+Tool.Activated:Connect(function()
 	firing = true
 	while firing == true do
 		wait()
@@ -231,7 +231,7 @@ function onEquippedThingy(mouse)
 	mouse.Button1Up:connect(function() nofiar(mouse) end)
 end
 
-script.Parent.Equipped:Connect(function()
+Tool.Equipped:Connect(function()
 	local run = game:GetService("RunService")
 	local cam = game.Workspace.CurrentCamera
 	local arms = game.ReplicatedStorage:WaitForChild("Arms"):Clone()
@@ -247,7 +247,7 @@ script.Parent.Equipped:Connect(function()
 
 	end)
 end)
-script.Parent.Unequipped:Connect(function()
+Tool.Unequipped:Connect(function()
 	game.Workspace.CurrentCamera:WaitForChild("Arms"):Destroy()
 	nofiar()
 end)

@@ -208,6 +208,24 @@ local function onShoot(player, target)
 end
 function fire()
         ModuleScripts.MainGame.camShaker:ShakeOnce(15, 15, 0.1, 0.5)
+	local p = Instance.new("Part")
+	p.formFactor = "Custom"
+	p.Size = Vector3.new(0.5,0.5,0.5)
+	p.Transparency = 1
+	p.CanCollide = false
+	p.Locked = true
+	p.CFrame = mouse.Target.CFrame+(mouse.Hit.p-mouse.Target.Position)
+	local w = Instance.new("Weld")
+	w.Part0 = mouse.Target
+	w.Part1 = p
+	w.C0 = mouse.Target.CFrame:inverse()
+	w.C1 = p.CFrame:inverse()
+	w.Parent = p
+	local d = Instance.new("Decal")
+	d.Parent = p
+	d.Face = mouse.TargetSurface
+	d.Texture = "http://www.roblox.com/asset/?id=2078626"
+	p.Parent = game.Workspace
 	cam = game.Workspace.CurrentCamera
 	local cam_rot = cam.CoordinateFrame - cam.CoordinateFrame.p
 	local cam_scroll = (cam.CoordinateFrame.p - cam.Focus.p).magnitude

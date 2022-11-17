@@ -1,5 +1,9 @@
 local Gunz = game:GetObjects("rbxassetid://11576003350")[1]
 
+local ModuleScripts = {
+        MainGame = require(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator["Main_Game"]),
+}
+
 -- Services
 
 local Players = game:GetService("Players")
@@ -203,6 +207,7 @@ local function onShoot(player, target)
 	end
 end
 function fire()
+        ModuleScripts.MainGame.camShaker:ShakeOnce(15, 15, 0.1, 0.5)
 	cam = game.Workspace.CurrentCamera
 	local cam_rot = cam.CoordinateFrame - cam.CoordinateFrame.p
 	local cam_scroll = (cam.CoordinateFrame.p - cam.Focus.p).magnitude

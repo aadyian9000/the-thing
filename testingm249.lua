@@ -195,7 +195,7 @@ local mouse = game.Players.LocalPlayer:GetMouse()
 local function onShoot(player, target)
 	if mouse.Target and mouse.Target.Parent then
 		
-	if mouse.Target:FindFirstChild("Attachment") then
+	if mouse.Target.Parent:FindFirstChild("RushNew") then
 		mouse.Target:Destroy()
 	else
 		print("Shot")

@@ -186,10 +186,22 @@ local confirmConnection; confirmConnection = Plr.PlayerGui.MainUI.ItemShop.Confi
 		end
 	end--]]
 end)
-local Tool = Gunz.M249 -- i know lolcat im sorry i used this technique of getting player's character.
+local Tool = Gunz.M249
 
 local firing = false
 local cframey = CFrame.new(0,-1,0)
+local mouse = game.Players.LocalPlayer:GetMouse()
+
+local function onShoot(player, target)
+	if mouse.Target and mouse.Target.Parent then
+		
+	if mouse.Target:FindFirstChild("Attachment") then
+		mouse.Target:Destroy()
+	else
+		print("Shot")
+		end
+	end
+end
 function fire()
 	cam = game.Workspace.CurrentCamera
 	local cam_rot = cam.CoordinateFrame - cam.CoordinateFrame.p
@@ -221,6 +233,7 @@ Tool.Activated:Connect(function()
 	while firing == true do
 		wait()
 		fire()
+		onShoot(mouse.Target)		
 	end
 end)
 

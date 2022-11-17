@@ -260,6 +260,7 @@ Tool.Equipped:Connect(function()
 		arms:SetPrimaryPartCFrame(cam.CFrame*cframey)
 
 	end)
+	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.Handle.Equip:Play()
 end)
 Tool.Unequipped:Connect(function()
 	game.Workspace.CurrentCamera:WaitForChild("Arms"):Destroy()

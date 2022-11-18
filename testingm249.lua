@@ -301,7 +301,7 @@ function reload()
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = "Reloading..."
 	wait(3)
 	reloading = false
-	Tool.Ammo.Value = script.Parent.MaxAmmo.Value
+	Tool:WaitForChild("Ammo").Value = Tool:WaitForChild("MaxAmmo").Value
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool:WaitForChild("Ammo").Value.."/"..Tool:WaitForChild("MaxAmmo").Value
 end
 function nofiar(mouse)

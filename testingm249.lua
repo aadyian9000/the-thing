@@ -251,8 +251,8 @@ function fire(player, target)
 		end
 	end
         ModuleScripts.MainGame.camShaker:ShakeOnce(15, 15, 0.1, 0.5)
-	Tool.Ammo.Value = Tool.Ammo.Value - 1
-	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool.Ammo.Value.."/"..Tool.MaxAmmo.Value
+	Tool:WaitForChild("Ammo").Value = Tool:WaitForChild("Ammo").Value - 1
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool:WaitForChild("Ammo").Value.."/"..Tool:WaitForChild("MaxAmmo").Value
 	local p = Instance.new("Part")
 	p.formFactor = "Custom"
 	p.Size = Vector3.new(0.5,0.5,0.5)
@@ -302,7 +302,7 @@ function reload()
 	wait(3)
 	reloading = false
 	Tool.Ammo.Value = script.Parent.MaxAmmo.Value
-	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool.Ammo.Value.."/"..Tool.MaxAmmo.Value
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool:WaitForChild("Ammo").Value.."/"..Tool:WaitForChild("MaxAmmo").Value
 end
 function nofiar(mouse)
 	firing = false
@@ -348,7 +348,7 @@ Tool.Equipped:Connect(function()
 
 	end)
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Enabled = true
-	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool.Ammo.Value.."/"..Tool.MaxAmmo.Value
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool:WaitForChild("Ammo").Value.."/"..Tool:WaitForChild("MaxAmmo").Value
 	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.Handle.Equip:Play()
 end)
 Tool.Unequipped:Connect(function()

@@ -251,7 +251,7 @@ function fire(player, target)
 		end
 	end
         ModuleScripts.MainGame.camShaker:ShakeOnce(15, 15, 0.1, 0.5)
-	script.Parent.Ammo.Value = script.Parent.Ammo.Value - 1
+	Tool.Ammo.Value = Tool.Ammo.Value - 1
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool.Ammo.Value.."/"..Tool.MaxAmmo.Value
 	local p = Instance.new("Part")
 	p.formFactor = "Custom"

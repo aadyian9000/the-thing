@@ -240,7 +240,7 @@ ammoe.TextStrokeTransparency = 0
 ammoe.TextWrapped = true
 
 function fire(player, target)
-	if not canfire or script.Parent.Ammo.Value <1 or reloading == true then return end
+	if not canfire or Tool.Ammo.Value <1 or reloading == true then return end
 	canfire = false
 	if mouse.Target and mouse.Target.Parent then
 
@@ -301,7 +301,7 @@ function reload()
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = "Reloading..."
 	wait(3)
 	reloading = false
-	script.Parent.Ammo.Value = script.Parent.MaxAmmo.Value
+	Tool.Ammo.Value = script.Parent.MaxAmmo.Value
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool.Ammo.Value.."/"..Tool.MaxAmmo.Value
 end
 function nofiar(mouse)

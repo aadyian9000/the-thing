@@ -193,21 +193,67 @@ end)
 local Tool = Gunz.M249
 
 local firing = false
+local canfire = true
+local reloading = false
 local cframey = CFrame.new(0,-1,0)
 local mouse = game.Players.LocalPlayer:GetMouse()
+local ammogui = game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo")
 
-local function onShoot(player, target)
+local ammothing = Instance.new("NumberValue")
+local ammothingmax = Instance.new("NumberValue")
+ammothing.Value = 7
+ammothingmax.Value = 7
+ammothing.Parent = Tool
+ammothingmax.Parent = Tool
+
+local Ammo = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local ammoe = Instance.new("TextLabel")
+
+Ammo.Name = "Ammo"
+Ammo.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Ammo.Enabled = false
+Ammo.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = Ammo
+Frame.BackgroundColor3 = Color3.new(0, 0, 0)
+Frame.BackgroundTransparency = 0.3499999940395355
+Frame.Position = UDim2.new(0.801481485, 0, 0.846336484, 0)
+Frame.Size = UDim2.new(0.198518515, 0, 0.153655514, 0)
+
+UICorner.Parent = Frame
+
+ammoe.Name = "ammo"
+ammoe.Parent = Frame
+ammoe.BackgroundColor3 = Color3.new(1, 1, 1)
+ammoe.BackgroundTransparency = 1
+ammoe.Position = UDim2.new(0.0597014949, 0, 0.0806451663, 0)
+ammoe.Size = UDim2.new(0.876865685, 0, 0.830645144, 0)
+ammoe.Font = Enum.Font.SourceSansBold
+ammoe.Text = "1/1"
+ammoe.TextColor3 = Color3.new(1, 1, 1)
+ammoe.TextScaled = true
+ammoe.TextSize = 14
+ammoe.TextStrokeTransparency = 0
+ammoe.TextWrapped = true
+	
+local ammogui = game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo")
+
+function fire(player, target)
+	if not canfire or script.Parent.Ammo.Value <1 or reloading == true then return end
+	canfire = false
 	if mouse.Target and mouse.Target.Parent then
-		
-	if mouse.Target.Parent:FindFirstChild("RushNew") then
-		mouse.Target:Destroy()
-	else
-		print("Shot")
+
+		if mouse.Target.Parent:FindFirstChild("RushNew") then
+			mouse.Target:Destroy()
+		else
+			print("Shot")
 		end
 	end
-end
-function fire()
         ModuleScripts.MainGame.camShaker:ShakeOnce(15, 15, 0.1, 0.5)
+	script.Parent.Ammo.Value = script.Parent.Ammo.Value - 1
+	ammogui.Frame.ammo.Text = Tool.Ammo.Value.."/"..Tool.MaxAmmo.Value
 	local p = Instance.new("Part")
 	p.formFactor = "Custom"
 	p.Size = Vector3.new(0.5,0.5,0.5)
@@ -247,17 +293,27 @@ function fire()
 	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.ParticleEmitter.Enabled = false
 	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.ParticleEmitter2.Enabled = false
 	cframey = CFrame.new(0,-1,0)
+	wait()
+	canfire = true
+end
+function reload()
+	reloading = true
+	--game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].Handle.Reload:Play()
+	ammogui.Frame.ammo.Text = "Reloading..."
+	wait(3)
+	reloading = false
+	script.Parent.Ammo.Value = script.Parent.MaxAmmo.Value
+	ammogui.Frame.ammo.Text = Tool.Ammo.Value.."/"..Tool.MaxAmmo.Value
 end
 function nofiar(mouse)
 	firing = false
 end
 Tool.Activated:Connect(function()
 	firing = true
-	while firing == true do
+	while firing == true and canfire == true do
 		wait()
-		fire()
-		onShoot(mouse.Target)		
-	end
+		fire(mouse.Target)
+		end
 end)
 
 function onEquippedThingy(mouse)
@@ -265,7 +321,16 @@ function onEquippedThingy(mouse)
 		print("Mouse not found")
 		return 
 	end
+	mouse.KeyDown:connect(KeyDownFunctions)
 	mouse.Button1Up:connect(function() nofiar(mouse) end)
+end
+
+function KeyDownFunctions(key)
+	if key == "r" then
+		if not reloading then
+			reload()
+		end
+	end
 end
 
 Tool.Equipped:Connect(function()
@@ -283,11 +348,14 @@ Tool.Equipped:Connect(function()
 		arms:SetPrimaryPartCFrame(cam.CFrame*cframey)
 
 	end)
+	ammogui.Enabled = true
+	ammogui.Frame.ammo.Text = Tool.Ammo.Value.."/"..Tool.MaxAmmo.Value
 	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.Handle.Equip:Play()
 end)
 Tool.Unequipped:Connect(function()
 	game.Workspace.CurrentCamera:WaitForChild("Arms"):Destroy()
 	nofiar()
+	ammogui.Enabled = false
 end)
 Tool.Equipped:connect(onEquippedThingy)
 Tool.Equipped:Connect(function()

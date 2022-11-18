@@ -1,4 +1,4 @@
-local Gunz = game:GetObjects("rbxassetid://11597570484")[1]
+local Gunz = game:GetObjects("rbxassetid://11597713914")[1]
 
 local ModuleScripts = {
         MainGame = require(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator["Main_Game"]),

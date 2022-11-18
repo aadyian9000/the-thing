@@ -178,8 +178,8 @@ end))
 local confirmConnection; confirmConnection = Plr.PlayerGui.MainUI.ItemShop.Confirm.MouseButton1Down:Connect(function()
 	confirmConnection:Disconnect()
 	
-	Gunz.Arms.Parent = game.ReplicatedStorage
-        Gunz.M249.TextureId = "rbxassetid://10889297548"
+	Gunz.ArmsM249.Parent = game.ReplicatedStorage
+        --Gunz.M249.TextureId = "rbxassetid://10889297548"
 	Gunz.M249.Parent = Plr.Backpack
 	Gunz:Destroy()
 	
@@ -198,14 +198,14 @@ local reloading = false
 local cframey = CFrame.new(0,-1,0)
 local mouse = game.Players.LocalPlayer:GetMouse()
 
-local ammothing = Instance.new("NumberValue")
+--[[local ammothing = Instance.new("NumberValue")
 local ammothingmax = Instance.new("NumberValue")
 ammothing.Value = 100
 ammothingmax.Value = 100
 ammothing.Name = "Ammo"
 ammothingmax.Name = "MaxAmmo"
 ammothing.Parent = Tool
-ammothingmax.Parent = Tool
+ammothingmax.Parent = Tool--]]
 
 local Ammo = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
@@ -276,10 +276,10 @@ function fire(player, target)
 	local cam_scroll = (cam.CoordinateFrame.p - cam.Focus.p).magnitude
 	local ncf = CFrame.new(cam.Focus.p)*cam_rot*CFrame.fromEulerAnglesXYZ(0.01, 0.01, 0)
 	cam.CoordinateFrame = ncf*CFrame.new(0, 0, cam_scroll)
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.FlashFX.Enabled = true
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.ParticleEmitter.Enabled = true
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.ParticleEmitter2.Enabled = true
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.Handle.Fire:Play()
+	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].SmokePart.FlashFX.Enabled = true
+	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].SmokePart.ParticleEmitter.Enabled = true
+	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].SmokePart.ParticleEmitter2.Enabled = true
+	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].Handle.Fire:Play()
 	cframey = CFrame.new(0,-1,0.2)
 	wait(0.02)
 	local cam_rot = cam.CoordinateFrame - cam.CoordinateFrame.p
@@ -288,16 +288,16 @@ function fire(player, target)
 	cam.CoordinateFrame = ncf*CFrame.new(0, 0, cam_scroll)
 	cframey = CFrame.new(0,-1,0.1)
 	wait(0.02)
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.FlashFX.Enabled = false
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.ParticleEmitter.Enabled = false
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.SmokePart.ParticleEmitter2.Enabled = false
+	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].SmokePart.FlashFX.Enabled = false
+	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].SmokePart.ParticleEmitter.Enabled = false
+	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].SmokePart.ParticleEmitter2.Enabled = false
 	cframey = CFrame.new(0,-1,0)
 	wait()
 	canfire = true
 end
 function reload()
 	reloading = true
-	--game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].Handle.Reload:Play()
+	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].Handle.Reload:Play()
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = "Reloading..."
 	wait(3)
 	reloading = false
@@ -335,7 +335,7 @@ end
 Tool.Equipped:Connect(function()
 	local run = game:GetService("RunService")
 	local cam = game.Workspace.CurrentCamera
-	local arms = game.ReplicatedStorage:WaitForChild("Arms"):Clone()
+	local arms = game.ReplicatedStorage:WaitForChild("Arms"..Tool.Name):Clone()
 	local plr = game.Players.LocalPlayer
 
 	--plr.CameraMode = Enum.CameraMode.LockFirstPerson
@@ -349,10 +349,10 @@ Tool.Equipped:Connect(function()
 	end)
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Enabled = true
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool:WaitForChild("Ammo").Value.."/"..Tool:WaitForChild("MaxAmmo").Value
-	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.Handle.Equip:Play()
+	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].Handle.Equip:Play()
 end)
 Tool.Unequipped:Connect(function()
-	game.Workspace.CurrentCamera:WaitForChild("Arms"):Destroy()
+	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name):Destroy()
 	nofiar()
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Enabled = false
 end)

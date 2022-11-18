@@ -237,8 +237,6 @@ ammoe.TextScaled = true
 ammoe.TextSize = 14
 ammoe.TextStrokeTransparency = 0
 ammoe.TextWrapped = true
-	
-local ammogui = game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo")
 
 function fire(player, target)
 	if not canfire or script.Parent.Ammo.Value <1 or reloading == true then return end
@@ -253,7 +251,7 @@ function fire(player, target)
 	end
         ModuleScripts.MainGame.camShaker:ShakeOnce(15, 15, 0.1, 0.5)
 	script.Parent.Ammo.Value = script.Parent.Ammo.Value - 1
-	ammogui.Frame.ammo.Text = Tool.Ammo.Value.."/"..Tool.MaxAmmo.Value
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool.Ammo.Value.."/"..Tool.MaxAmmo.Value
 	local p = Instance.new("Part")
 	p.formFactor = "Custom"
 	p.Size = Vector3.new(0.5,0.5,0.5)
@@ -299,11 +297,11 @@ end
 function reload()
 	reloading = true
 	--game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].Handle.Reload:Play()
-	ammogui.Frame.ammo.Text = "Reloading..."
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = "Reloading..."
 	wait(3)
 	reloading = false
 	script.Parent.Ammo.Value = script.Parent.MaxAmmo.Value
-	ammogui.Frame.ammo.Text = Tool.Ammo.Value.."/"..Tool.MaxAmmo.Value
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool.Ammo.Value.."/"..Tool.MaxAmmo.Value
 end
 function nofiar(mouse)
 	firing = false
@@ -348,14 +346,14 @@ Tool.Equipped:Connect(function()
 		arms:SetPrimaryPartCFrame(cam.CFrame*cframey)
 
 	end)
-	ammogui.Enabled = true
-	ammogui.Frame.ammo.Text = Tool.Ammo.Value.."/"..Tool.MaxAmmo.Value
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Enabled = true
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool.Ammo.Value.."/"..Tool.MaxAmmo.Value
 	game.Workspace.CurrentCamera:WaitForChild("Arms").M249.Handle.Equip:Play()
 end)
 Tool.Unequipped:Connect(function()
 	game.Workspace.CurrentCamera:WaitForChild("Arms"):Destroy()
 	nofiar()
-	ammogui.Enabled = false
+	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Enabled = false
 end)
 Tool.Equipped:connect(onEquippedThingy)
 Tool.Equipped:Connect(function()

@@ -197,7 +197,6 @@ local canfire = true
 local reloading = false
 local cframey = CFrame.new(0,-1,0)
 local mouse = game.Players.LocalPlayer:GetMouse()
-local ammogui = game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo")
 
 local ammothing = Instance.new("NumberValue")
 local ammothingmax = Instance.new("NumberValue")

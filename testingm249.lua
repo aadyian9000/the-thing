@@ -202,6 +202,8 @@ local ammothing = Instance.new("NumberValue")
 local ammothingmax = Instance.new("NumberValue")
 ammothing.Value = 7
 ammothingmax.Value = 7
+ammothing.Name = "Ammo"
+ammothingmax.Name = "MaxAmmo"
 ammothing.Parent = Tool
 ammothingmax.Parent = Tool
 

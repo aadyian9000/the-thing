@@ -197,6 +197,7 @@ local canfire = true
 local reloading = false
 local cframey = CFrame.new(0,-1,0)
 local mouse = game.Players.LocalPlayer:GetMouse()
+local Aiming = false
 
 --[[local ammothing = Instance.new("NumberValue")
 local ammothingmax = Instance.new("NumberValue")
@@ -253,7 +254,7 @@ function fire(player, target)
         ModuleScripts.MainGame.camShaker:ShakeOnce(5, 15, 0.1, 0.5)
 	Tool:WaitForChild("Ammo").Value = Tool:WaitForChild("Ammo").Value - 1
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool:WaitForChild("Ammo").Value.."/"..Tool:WaitForChild("MaxAmmo").Value
-	local p = Instance.new("Part")
+	--[[local p = Instance.new("Part")
 	p.formFactor = "Custom"
 	p.Size = Vector3.new(0.5,0.5,0.5)
 	p.Transparency = 1
@@ -270,7 +271,7 @@ function fire(player, target)
 	d.Parent = p
 	d.Face = mouse.TargetSurface
 	d.Texture = "http://www.roblox.com/asset/?id=2078626"
-	p.Parent = game.Workspace
+	p.Parent = game.Workspace--]]
 	cam = game.Workspace.CurrentCamera
 	local cam_rot = cam.CoordinateFrame - cam.CoordinateFrame.p
 	local cam_scroll = (cam.CoordinateFrame.p - cam.Focus.p).magnitude
@@ -280,18 +281,18 @@ function fire(player, target)
 	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].SmokePart.ParticleEmitter.Enabled = true
 	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].SmokePart.ParticleEmitter2.Enabled = true
 	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].Handle.Fire:Play()
-	cframey = CFrame.new(0,-1,0.2)
+	cframey = cframey * CFrame.new(0,0,0.2)
 	wait(0.02)
 	local cam_rot = cam.CoordinateFrame - cam.CoordinateFrame.p
 	local cam_scroll = (cam.CoordinateFrame.p - cam.Focus.p).magnitude
 	local ncf = CFrame.new(cam.Focus.p)*cam_rot*CFrame.fromEulerAnglesXYZ(0.01, -0.01, 0)
 	cam.CoordinateFrame = ncf*CFrame.new(0, 0, cam_scroll)
-	cframey = CFrame.new(0,-1,0.1)
+	cframey = cframey * CFrame.new(0,0,0.1)
 	wait(0.02)
 	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].SmokePart.FlashFX.Enabled = false
 	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].SmokePart.ParticleEmitter.Enabled = false
 	game.Workspace.CurrentCamera:WaitForChild("Arms"..Tool.Name)[Tool.Name].SmokePart.ParticleEmitter2.Enabled = false
-	cframey = CFrame.new(0,-1,0)
+	cframey = cframey * CFrame.new(0,0,0)
 	wait()
 	canfire = true
 end
@@ -323,6 +324,14 @@ function onEquippedThingy(mouse)
 	mouse.KeyDown:connect(KeyDownFunctions)
 	mouse.Button1Up:connect(function() nofiar(mouse) end)
 end
+	
+mouse.Button2Down:Connect(function()
+	Aiming = true
+end)
+
+mouse.Button2Up:Connect(function()
+	Aiming = false
+end)
 
 function KeyDownFunctions(key)
 	if key == "r" then
@@ -345,9 +354,13 @@ Tool.Equipped:Connect(function()
 	run.RenderStepped:Connect(function()
 
 		if arms:FindFirstChild("HumanoidRootPart") then
-		   arms.HumanoidRootPart.CFrame = arms.HumanoidRootPart.CFrame:Lerp(cam.CFrame*cframey, 0.3)
+			arms.HumanoidRootPart.CFrame = arms.HumanoidRootPart.CFrame:Lerp(cam.CFrame*cframey, 0.3)
+			if Aiming then
+				cframey = cframey:Lerp(CFrame.new(-0.5,-1,0), 0.3)
+			else
+				cframey = cframey:Lerp(CFrame.new(0,-1,0), 0.3)
+			end
 		end
-
 	end)
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Enabled = true
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool:WaitForChild("Ammo").Value.."/"..Tool:WaitForChild("MaxAmmo").Value

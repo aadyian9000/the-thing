@@ -250,7 +250,7 @@ function fire(player, target)
 			print("Shot")
 		end
 	end
-        ModuleScripts.MainGame.camShaker:ShakeOnce(15, 15, 0.1, 0.5)
+        ModuleScripts.MainGame.camShaker:ShakeOnce(5, 15, 0.1, 0.5)
 	Tool:WaitForChild("Ammo").Value = Tool:WaitForChild("Ammo").Value - 1
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Frame.ammo.Text = Tool:WaitForChild("Ammo").Value.."/"..Tool:WaitForChild("MaxAmmo").Value
 	local p = Instance.new("Part")
@@ -344,7 +344,9 @@ Tool.Equipped:Connect(function()
 
 	run.RenderStepped:Connect(function()
 
-		arms:SetPrimaryPartCFrame(cam.CFrame*cframey)
+		if arms:FindFirstChild("HumanoidRootPart") then
+		   arms.HumanoidRootPart.CFrame = arms.HumanoidRootPart.CFrame:Lerp(cam.CFrame*cframey, 0.3)
+		end
 
 	end)
 	game.Players.LocalPlayer.PlayerGui:WaitForChild("Ammo").Enabled = true

@@ -782,7 +782,7 @@ local Entities = {
 					if OnScreen then
 						if workspace:Raycast(Camera.CFrame.Position, Eyes.Position - Camera.CFrame.Position, Parameters) == nil then
 							game.Players.LocalPlayer.Character.Humanoid.Health -= Damage
-							if not game.Players.LocalPlayer.Character.Humanoid.Health <= 1 then
+							if not game.Players.LocalPlayer.Character.Humanoid.Health < 1 then
                             ModuleScripts.MainGame.camShaker:ShakeOnce(15, 20, 0.1, 0.5)
 			    end
 			                            firesignal(game.ReplicatedStorage.Bricks.DeathHint.OnClientEvent, {"You died to the Eyes again...", "They have a unique audio cue. Once you hear it, be prepared.", "Use their blue light to work out their location. Look away from them at all times."})

@@ -194,7 +194,7 @@ Death = {
 			u2.deathtick = tick();
 		end
 
-		SpawnerLibrary.Prepare({"You died to Rush..."}, "Rush")
+		SpawnerLibrary.Prepare({"It seems you are having trouble with Rush...", "The lights will always flicker when it is near.", "Whenever this happens, find a hiding spot."}, "Rush")
 		Jumpscare()
 	end,
 	Ambush = function()
@@ -244,7 +244,7 @@ Death = {
 			return;
 		end
 
-		SpawnerLibrary.Prepare({"You died to who you call Ambush..."}, "Ambush")
+		SpawnerLibrary.Prepare({"You died to Ambush.", "You might need to hop in and out of your hiding spot a couple of times."}, "Ambush")
 		Jumpscare()
 	end,
 }
@@ -782,7 +782,10 @@ local Entities = {
 					if OnScreen then
 						if workspace:Raycast(Camera.CFrame.Position, Eyes.Position - Camera.CFrame.Position, Parameters) == nil then
 							game.Players.LocalPlayer.Character.Humanoid.Health -= Damage
+							if not game.Players.LocalPlayer.Character.Humanoid.Health == 0 then
                             ModuleScripts.MainGame.camShaker:ShakeOnce(15, 20, 0.1, 0.5)
+			    end
+			                            firesignal(game.ReplicatedStorage.Bricks.DeathHint.OnClientEvent, {"You died to the Eyes again...", "They have a unique audio cue. Once you hear it, be prepared.", "Use their blue light to work out their location. Look away from them at all times."})
 						end
 					end
 

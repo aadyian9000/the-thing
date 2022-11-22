@@ -786,6 +786,7 @@ local Entities = {
                             ModuleScripts.MainGame.camShaker:ShakeOnce(15, 20, 0.1, 0.5)
 			    end
 			                            firesignal(game.ReplicatedStorage.Bricks.DeathHint.OnClientEvent, {"You died to the Eyes again...", "They have a unique audio cue. Once you hear it, be prepared.", "Use their blue light to work out their location. Look away from them at all times."})
+						    game.ReplicatedStorage.GameStats["Player_".. game.Players.LocalPlayer].Total.DeathCause.Value = "Eyes"
 						end
 					end
 

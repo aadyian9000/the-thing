@@ -60,7 +60,7 @@ local SpawnerLibrary = {
 
 		for _,Room in ipairs(workspace.CurrentRooms:GetChildren()) do
 			t += 1
-			if Room:FindFirstChild("RoomStart") and tonumber(Room.Name) == game.ReplicatedStorage.GameData.LatestRoom.Value then
+			if Room:FindFirstChild("RoomEntrance") and tonumber(Room.Name) == game.ReplicatedStorage.GameData.LatestRoom.Value then
 				Earliest = tonumber(Room.Name)
 				break;
 			end
@@ -73,7 +73,7 @@ local SpawnerLibrary = {
 		local Latest = game.ReplicatedStorage.GameData.LatestRoom.Value
 
 		for _,Room in ipairs(workspace.CurrentRooms:GetChildren()) do
-			if Room:FindFirstChild("RoomStart") then
+			if Room:FindFirstChild("RoomEntrance") then
 				Earliest = tonumber(Room.Name)
 				break;
 			end
@@ -584,7 +584,7 @@ local Entities = {
 			local Jack = Instance.new("Part", workspace)
 			Jack.Name = "MobbleHallway"
 
-			Jack.CFrame = Room.RoomStart.CFrame * CFrame.new(Vector3.new(0,0,-5))
+			Jack.CFrame = Room.RoomEntrance.CFrame * CFrame.new(Vector3.new(0,0,-5))
 			Jack.Orientation = Jack.Orientation + Vector3.new(0,180,0)
 			Jack.Anchored = true
 			Jack.CanCollide = false

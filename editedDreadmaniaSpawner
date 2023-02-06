@@ -78,7 +78,7 @@ local SpawnerLibrary = {
 				break;
 			end
 		end
-
+                print(Earliest)
 		return workspace.CurrentRooms[Earliest], workspace.CurrentRooms[Latest]
 	end,
 	Raycast = function(Player, Part, Entity, Distance)
@@ -318,10 +318,10 @@ local Entities = {
 				for i,v in ipairs(workspace.CurrentRooms:GetChildren()) do
 					if tonumber(v.Name) < tonumber(early.Name) then continue end
 					if v:GetAttribute("lol") then continue end
-					if v:FindFirstChild("Nodes") then
+					if v:FindFirstChild("PathfindNodes") then
 						v:SetAttribute("lol", true)
 						require(game:GetService("ReplicatedStorage").ClientModules.EntityModules.Seek).tease(nil, v, 14, 1665596753, true)
-						for i,v in ipairs(v.Nodes:GetChildren()) do
+						for i,v in ipairs(v.PathfindNodes:GetChildren()) do
 							SpawnerLibrary.Tween(val, v, 25, CFrame.new(0,5,0))
 						end
 					end
@@ -403,7 +403,7 @@ local Entities = {
 				local Last = workspace.CurrentRooms:FindFirstChild(tonumber(Room.Name) - 1)
 				
 				if Last then
-					if Last:FindFirstChild("Nodes") then
+					if Last:FindFirstChild("PathfindNodes") then
 						if Last:GetAttribute("Done") == true then
 							IsPossible = false
 						end
@@ -427,7 +427,7 @@ local Entities = {
 					end
 				end
 				
-				if Room:FindFirstChild("Nodes") and IsPossible then
+				if Room:FindFirstChild("PathfindNodes") and IsPossible then
 					Event("breakLights", Room, 0.416, 60)
 					for i,v in pairs(Room.Nodes:GetChildren()) do
 						SpawnerLibrary.Tween2(RushNew, v, RushSpeed, CFrame.new(0,4,0))
@@ -523,7 +523,7 @@ local Entities = {
 
 					if Next then
 						if tonumber(Room.Name) == tonumber(game.ReplicatedStorage.GameData.LatestRoom.Value) then
-							if Room:FindFirstChild("Door") and Room:FindFirstChild("Nodes") then
+							if Room:FindFirstChild("Door") and Room:FindFirstChild("PathfindNodes") then
 								if Room.Door.Door.Anchored then
 									Next:SetAttribute("Possible", false)
 								end

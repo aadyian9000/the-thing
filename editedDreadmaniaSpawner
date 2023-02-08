@@ -504,6 +504,8 @@ local Entities = {
             local fakeNode = Instance.new("Part")
             fakeNode.Name = "1"
             fakeNode.CFrame = room:WaitForChild("RoomExit").CFrame - Vector3.new(0, room.RoomExit.Size.Y / 2, 0)
+	    fakeNode.Anchored = true
+	    fakeNode.Transparency = 1
             local fakeFolder = Instance.new("Folder")
 	    fakeFolder.Name = "PathfindNodes"
 	    fakeFolder.Parent = room
@@ -553,7 +555,7 @@ end
 							table.insert(Nodes, 1, v)
 							SpawnerLibrary.Tween2(RushNew, v, AmbushSpeed, CFrame.new(0,4,0))
 						end
-						SpawnerLibrary.Tween2(RushNew, Room.RoomEnd, AmbushSpeed)
+						SpawnerLibrary.Tween2(RushNew, Room.RoomExit, AmbushSpeed)
 					end
 				end
 				

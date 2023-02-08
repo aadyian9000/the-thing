@@ -14,7 +14,7 @@ local ModuleScripts = {
     MainGame = require(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator["Main_Game"]),
 }
 
-local Plr = Players.LocalPlayer
+local Plr = game.Players.LocalPlayer
 local Char = Plr.Character or Plr.CharacterAdded:Wait()
 local Hum = Char:WaitForChild("Humanoid")
 

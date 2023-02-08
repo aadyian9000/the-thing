@@ -2,7 +2,7 @@
 
 --\\
 
-local v1 = game.Players.LocalPlayer.PlayerGui.MainUI
+local v1 = game.Players.LocalPlayer.PlayerGui.MainUI.Jumpscare
 local u2 = require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game)
 
 local Death = {}

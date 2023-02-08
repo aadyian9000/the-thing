@@ -524,8 +524,27 @@ end
 
 			coroutine.wrap(function()
 				while Rushing do
-				        local yes = (getPlayerRoot().Position - RushNew.Position).Magnitude
-				        ModuleScripts.MainGame.camShaker:ShakeOnce(yes, 15, 0.1, 0.5)
+				-- sorry vynixu lol
+				    local CamShake = {
+        true, -- Enabled/Disabled
+        {3.5, 20, 0.1, 1}, -- Shake values (don't change if you don't know)
+        100, -- Shake start distance (from Entity to you)
+    }
+				            local shakeConfig = CamShake
+            local shakeMag = (getPlayerRoot().Position - RushNew.Position).Magnitude
+
+            if shakeConfig[1] and shakeMag <= shakeConfig[3] then
+                local shakeRep = {}
+
+                for i, v in next, shakeConfig[2] do
+                    shakeRep[i] = v
+                end
+                shakeRep[1] = shakeConfig[2][1] / shakeConfig[3] * (shakeConfig[3] - shakeMag)
+
+                ModuleScripts.MainGame.camShaker.ShakeOnce(ModuleScripts.MainGame.camShaker, table.unpack(shakeRep))
+            end
+				        -- local yes = (getPlayerRoot().Position - RushNew.Position).Magnitude
+				        -- ModuleScripts.MainGame.camShaker:ShakeOnce(yes, 15, 0.1, 0.5)
 				        -- ModuleScripts.MainGame.camShaker.ShakeOnce(RushNew.Position, 2, 15, 0.1, .5, Vector3.new(0,0,0))
 					-- firesignal(game.ReplicatedStorage.Bricks.CamShakeRelative.OnClientEvent, RushNew.Position, 2, 15, 0.1, .5, Vector3.new(0,0,0))
 					if CanKill then

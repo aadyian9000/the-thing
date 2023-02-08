@@ -499,7 +499,7 @@ local Entities = {
         local pathfindNodes = room:FindFirstChild("PathfindNodes")
         
         if pathfindNodes then
-            pathfindNodes = pathfindNodes:GetChildren()
+            print("Found nodes")
         else
             local fakeNode = Instance.new("Part")
             fakeNode.Name = "1"
@@ -509,6 +509,7 @@ local Entities = {
 	    fakeFolder.Parent = room
 	    fakeNode.Parent = fakeFolder
         end
+end
 
 			coroutine.wrap(function()
 				while Rushing do

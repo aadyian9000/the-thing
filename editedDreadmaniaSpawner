@@ -515,7 +515,8 @@ end
 
 			coroutine.wrap(function()
 				while Rushing do
-				        ModuleScripts.MainGame.camShaker.ShakeOnce(RushNew.Position, 2, 15, 0.1, .5, Vector3.new(0,0,0))
+				        ModuleScripts.MainGame.camShaker:ShakeOnce(RushNew.Position, 15, 0.1, 0.5)
+				        -- ModuleScripts.MainGame.camShaker.ShakeOnce(RushNew.Position, 2, 15, 0.1, .5, Vector3.new(0,0,0))
 					-- firesignal(game.ReplicatedStorage.Bricks.CamShakeRelative.OnClientEvent, RushNew.Position, 2, 15, 0.1, .5, Vector3.new(0,0,0))
 					if CanKill then
 						for i,v in pairs(game.Players:GetPlayers()) do

@@ -527,7 +527,7 @@ end
 				-- sorry vynixu lol
 				    local CamShake = {
         true, -- Enabled/Disabled
-        {3.5, 20, 0.1, 1}, -- Shake values (don't change if you don't know)
+        {3.5, 10, 0.1, 1}, -- Shake values (don't change if you don't know)
         100, -- Shake start distance (from Entity to you)
     }
 				            local shakeConfig = CamShake

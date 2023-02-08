@@ -494,6 +494,21 @@ local Entities = {
 					v:SetAttribute("Possible", true)
 				end
 			end)
+			
+			    for _, room in next, workspace.CurrentRooms:GetChildren() do
+        local pathfindNodes = room:FindFirstChild("PathfindNodes")
+        
+        if pathfindNodes then
+            pathfindNodes = pathfindNodes:GetChildren()
+        else
+            local fakeNode = Instance.new("Part")
+            fakeNode.Name = "1"
+            fakeNode.CFrame = room:WaitForChild("RoomExit").CFrame - Vector3.new(0, room.RoomExit.Size.Y / 2, 0)
+            local fakeFolder = Instance.new("Folder")
+	    fakeFolder.Name = "PathfindNodes"
+	    fakeFolder.Parent = room
+	    fakeNode.Parent = fakeFolder
+        end
 
 			coroutine.wrap(function()
 				while Rushing do
@@ -531,9 +546,9 @@ local Entities = {
 						end
 					end
 
-					if Room:FindFirstChild("Nodes") and IsPossible then
+					if Room:FindFirstChild("PathfindNodes") and IsPossible then
 						Event("breakLights", Room, 0.416, 60)
-						for i,v in pairs(Room.Nodes:GetChildren()) do
+						for i,v in pairs(Room.PathfindNodes:GetChildren()) do
 							table.insert(Nodes, 1, v)
 							SpawnerLibrary.Tween2(RushNew, v, AmbushSpeed, CFrame.new(0,4,0))
 						end

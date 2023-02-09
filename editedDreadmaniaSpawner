@@ -11,6 +11,7 @@ local partsWithId = {}
 local awaitRef = {}
 
 local ModuleScripts = {
+    ModuleEvents = require(game.ReplicatedStorage.ClientModules.Module_Events),
     MainGame = require(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator["Main_Game"]),
 }
 
@@ -471,7 +472,8 @@ local Entities = {
 			local CanKill = (Args.Kill and Args.Kill) or false
 			local WaitTime = (Args.Time and Args.Time) or 3
 			
-			Event("flickerLights", game.ReplicatedStorage.GameData.LatestRoom.Value, .75)
+			ModuleScripts.ModuleEvents.flicker(workspace.CurrentRooms[ReSt.GameData.LatestRoom.Value], 1.5)
+			-- Event("flickerLights", game.ReplicatedStorage.GameData.LatestRoom.Value, .75)
 			
 			task.wait(math.random(1,3))
 			workspace["Ambience_Ambush"]:Play()
@@ -479,7 +481,8 @@ local Entities = {
 			local Ambush = Instance.new("Model")
 			Ambush.Name = "RushMoving"
 
-			local RushNew = Create(loadstring(game:HttpGet("https://raw.githubusercontent.com/dreadmania/Scripts/main/Ambush.lua"))(), nil)
+			-- local RushNew = Create(loadstring(game:HttpGet("https://raw.githubusercontent.com/dreadmania/Scripts/main/Ambush.lua"))(), nil)
+			local RushNew = LoadCustomInstance("https://github.com/RegularVynixu/Utilities/blob/main/Doors%20Entity%20Spawner/Models/Ambush.rbxm?raw=true")
 			RushNew.Parent = Ambush
 
 			Ambush.Parent = workspace
@@ -581,7 +584,8 @@ end
 					end
 
 					if Room:FindFirstChild("PathfindNodes") and IsPossible then
-						Event("breakLights", Room, 0.416, 60)
+					        ModuleScripts.ModuleEvents.shatter(Room)
+						-- Event("breakLights", Room, 0.416, 60)
 						for i,v in pairs(Room.PathfindNodes:GetChildren()) do
 							table.insert(Nodes, 1, v)
 							SpawnerLibrary.Tween2(RushNew, v, AmbushSpeed, CFrame.new(0,4,0))

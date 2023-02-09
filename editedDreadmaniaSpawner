@@ -472,7 +472,7 @@ local Entities = {
 			local CanKill = (Args.Kill and Args.Kill) or false
 			local WaitTime = (Args.Time and Args.Time) or 3
 			
-			ModuleScripts.ModuleEvents.flicker(workspace.CurrentRooms[ReSt.GameData.LatestRoom.Value], 1.5)
+			ModuleScripts.ModuleEvents.flicker(workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value], 1.5)
 			-- Event("flickerLights", game.ReplicatedStorage.GameData.LatestRoom.Value, .75)
 			
 			task.wait(math.random(1,3))

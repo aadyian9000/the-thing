@@ -481,8 +481,8 @@ local Entities = {
 			local Ambush = Instance.new("Model")
 			Ambush.Name = "RushMoving"
 
-			-- local RushNew = Create(loadstring(game:HttpGet("https://raw.githubusercontent.com/dreadmania/Scripts/main/Ambush.lua"))(), nil)
-			local RushNew = LoadCustomInstance("https://github.com/RegularVynixu/Utilities/blob/main/Doors%20Entity%20Spawner/Models/Ambush.rbxm?raw=true")
+			local RushNew = Create(loadstring(game:HttpGet("https://raw.githubusercontent.com/dreadmania/Scripts/main/Ambush.lua"))(), nil)
+			-- local RushNew = LoadCustomInstance("https://github.com/RegularVynixu/Utilities/blob/main/Doors%20Entity%20Spawner/Models/Ambush.rbxm?raw=true")
 			RushNew.Parent = Ambush
 
 			Ambush.Parent = workspace

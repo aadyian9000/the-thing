@@ -470,7 +470,7 @@ end
 
 				if Next then
 					if tonumber(Room.Name) == tonumber(game.ReplicatedStorage.GameData.LatestRoom.Value) then
-						if Room:FindFirstChild("Door") and Room:FindFirstChild("Nodes") then
+						if Room:FindFirstChild("Door") and Room:FindFirstChild("PathfindNodes") then
 							if Room.Door.Door.Anchored then
 								Next:SetAttribute("Possible", false)
 							end
@@ -481,7 +481,7 @@ end
 				if Room:FindFirstChild("PathfindNodes") and IsPossible then
 				        ModuleScripts.ModuleEvents.shatter(Room)
 					-- Event("breakLights", Room, 0.416, 60)
-					for i,v in pairs(Room.Nodes:GetChildren()) do
+					for i,v in pairs(Room.PathfindNodes:GetChildren()) do
 						SpawnerLibrary.Tween2(RushNew, v, RushSpeed, CFrame.new(0,4,0))
 					end
 					SpawnerLibrary.Tween2(RushNew, Room.RoomExit, RushSpeed)

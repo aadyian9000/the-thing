@@ -356,7 +356,7 @@ local Entities = {
 			local CanKill = (Args.Kill and Args.Kill) or false
 			local WaitTime = (Args.Time and Args.Time) or 5
 			
-			Event("flickerLights", game.ReplicatedStorage.GameData.LatestRoom.Value, .75)
+			ModuleScripts.ModuleEvents.flicker(workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value], .75)
 
 			local Rush = Instance.new("Model")
 			Rush.Name = "RushMoving"
@@ -393,10 +393,47 @@ local Entities = {
 					v:SetAttribute("Possible", true)
 				end
 			end)
+			
+						    for _, room in next, workspace.CurrentRooms:GetChildren() do
+        local pathfindNodes = room:FindFirstChild("PathfindNodes")
+        
+        if pathfindNodes then
+            print("Found nodes")
+        else
+            local fakeNode = Instance.new("Part")
+            fakeNode.Name = "1"
+            fakeNode.CFrame = room:WaitForChild("RoomExit").CFrame - Vector3.new(0, room.RoomExit.Size.Y / 2, 0)
+	    fakeNode.Anchored = true
+	    fakeNode.Transparency = 1
+            local fakeFolder = Instance.new("Folder")
+	    fakeFolder.Name = "PathfindNodes"
+	    fakeFolder.Parent = room
+	    fakeNode.Parent = fakeFolder
+        end
+end
 
 			coroutine.wrap(function()
 				while Rushing do
-					firesignal(game.ReplicatedStorage.Bricks.CamShakeRelative.OnClientEvent, RushNew.Position, 2, 15, 0.1, .2, Vector3.new(0,0,0))
+								-- sorry vynixu lol
+				    local CamShake = {
+        true, -- Enabled/Disabled
+        {2, 15, 0.1, .2}, -- Shake values (don't change if you don't know)
+        100, -- Shake start distance (from Entity to you)
+    }
+				            local shakeConfig = CamShake
+            local shakeMag = (getPlayerRoot().Position - RushNew.Position).Magnitude
+
+            if shakeConfig[1] and shakeMag <= shakeConfig[3] then
+                local shakeRep = {}
+
+                for i, v in next, shakeConfig[2] do
+                    shakeRep[i] = v
+                end
+                shakeRep[1] = shakeConfig[2][1] / shakeConfig[3] * (shakeConfig[3] - shakeMag)
+
+                ModuleScripts.MainGame.camShaker.ShakeOnce(ModuleScripts.MainGame.camShaker, table.unpack(shakeRep))
+            end
+					-- firesignal(game.ReplicatedStorage.Bricks.CamShakeRelative.OnClientEvent, RushNew.Position, 2, 15, 0.1, .2, Vector3.new(0,0,0))
 					if CanKill then
 						for i,v in pairs(game.Players:GetPlayers()) do
 							SpawnerLibrary.Raycast(v, RushNew, "Rush", 50)
@@ -438,7 +475,8 @@ local Entities = {
 				end
 				
 				if Room:FindFirstChild("PathfindNodes") and IsPossible then
-					Event("breakLights", Room, 0.416, 60)
+				        ModuleScripts.ModuleEvents.shatter(Room)
+					-- Event("breakLights", Room, 0.416, 60)
 					for i,v in pairs(Room.Nodes:GetChildren()) do
 						SpawnerLibrary.Tween2(RushNew, v, RushSpeed, CFrame.new(0,4,0))
 					end

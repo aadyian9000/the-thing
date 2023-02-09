@@ -357,15 +357,19 @@ local Entities = {
 			local WaitTime = (Args.Time and Args.Time) or 5
 			
 			ModuleScripts.ModuleEvents.flicker(workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value], .75)
-
-			local Rush = Instance.new("Model")
-			Rush.Name = "RushMoving"
-
-			local RushNew = game.ReplicatedStorage.JumpscareModels.RushNew:Clone()
-			RushNew.Parent = Rush
-
+			
+			local Rush = game:GetObjects("rbxassetid://12431769808")[1]
 			Rush.Parent = workspace
-			Rush.PrimaryPart = RushNew
+			local RushNew = Rush:WaitForChild("RushNew")
+
+			-- local Rush = Instance.new("Model")
+			-- Rush.Name = "RushMoving"
+
+			-- local RushNew = game.ReplicatedStorage.JumpscareModels.RushNew:Clone()
+			-- RushNew.Parent = Rush
+
+			-- Rush.Parent = workspace
+			-- Rush.PrimaryPart = RushNew
 
 			for i,v in pairs(Rush:GetDescendants()) do
 				if v:IsA("Sound") then

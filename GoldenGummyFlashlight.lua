@@ -17,6 +17,12 @@ local Humanoid = Player.Character:WaitForChild("Humanoid")
 local Equipped = false
 
 local AnimationsFolder = Tool.Animations
+
+AnimationsFolder.idle.AnimationId = "rbxassetid://11372556429"
+AnimationsFolder.shake.AnimationId = "rbxassetid://12001275923"
+
+Tool.Handle["sound_shake"].SoundId = "rbxassetid://11374330092"
+
 local Hold = Humanoid:LoadAnimation(AnimationsFolder.idle)
 local Shake = Humanoid:LoadAnimation(AnimationsFolder.shake)
 

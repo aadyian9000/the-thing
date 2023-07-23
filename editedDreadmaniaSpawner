@@ -11,8 +11,8 @@ local partsWithId = {}
 local awaitRef = {}
 
 local ModuleScripts = {
-    ModuleEvents = require(game.ReplicatedStorage.ClientModules.Module_Events),
-    MainGame = require(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator["Main_Game"]),
+	ModuleEvents = require(game.ReplicatedStorage.ClientModules.Module_Events),
+	MainGame = require(game:GetService("Players").LocalPlayer.PlayerGui.MainUI.Initiator["Main_Game"]),
 }
 
 local Players = game:GetService("Players")
@@ -21,7 +21,7 @@ local Char = Plr.Character or Plr.CharacterAdded:Wait()
 local Hum = Char:WaitForChild("Humanoid")
 
 function getPlayerRoot()
-    return Char:FindFirstChild("HumanoidRootPart") or Char:FindFirstChild("Head")
+	return Char:FindFirstChild("HumanoidRootPart") or Char:FindFirstChild("Head")
 end
 
 local SpawnerLibrary = {
@@ -88,7 +88,7 @@ local SpawnerLibrary = {
 				break;
 			end
 		end
-                print(Earliest)
+		print(Earliest)
 		return workspace.CurrentRooms[Earliest], workspace.CurrentRooms[Latest]
 	end,
 	Raycast = function(Player, Part, Entity, Distance)
@@ -105,7 +105,7 @@ local SpawnerLibrary = {
 
 				if Hit:IsDescendantOf(Player.Character) and (Player.Character:GetAttribute("Hiding") == false or Player.Character:GetAttribute("Hiding") == nil) then
 					Player.Character.Humanoid.Health = 0
-					
+
 					Death[Entity]()
 				end
 			end
@@ -119,7 +119,7 @@ local SpawnerLibrary = {
 				end
 			end
 
-			firesignal(game.ReplicatedStorage.Bricks.DeathHint.OnClientEvent, Lines)
+			firesignal(game.ReplicatedStorage.EntityInfo.DeathHint.OnClientEvent, Lines, "Blue")
 		end)()
 	end
 }
@@ -269,7 +269,7 @@ local Entities = {
 		Func = function(Args)
 			local Kill = Args.Kill and Args.Kill or false
 			local Rooms = Args.Rooms and tonumber(Args.Rooms) or 15
-			
+
 			local u2 = require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game)
 
 			workspace.Ambience_Seek.TimePosition = 0
@@ -355,9 +355,9 @@ local Entities = {
 			local RushSpeed = (Args.Speed and Args.Speed) or 60
 			local CanKill = (Args.Kill and Args.Kill) or false
 			local WaitTime = (Args.Time and Args.Time) or 5
-			
+
 			ModuleScripts.ModuleEvents.flicker(workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value], .75)
-			
+
 			local Rush = game:GetObjects("rbxassetid://12431769808")[1]
 			Rush.Parent = workspace
 			local RushNew = Rush:WaitForChild("RushNew")
@@ -397,46 +397,46 @@ local Entities = {
 					v:SetAttribute("Possible", true)
 				end
 			end)
-			
-						    for _, room in next, workspace.CurrentRooms:GetChildren() do
-        local pathfindNodes = room:FindFirstChild("PathfindNodes")
-        
-        if pathfindNodes then
-            print("Found nodes")
-        else
-            local fakeNode = Instance.new("Part")
-            fakeNode.Name = "1"
-            fakeNode.CFrame = room:WaitForChild("RoomExit").CFrame - Vector3.new(0, room.RoomExit.Size.Y / 2, 0)
-	    fakeNode.Anchored = true
-	    fakeNode.Transparency = 1
-            local fakeFolder = Instance.new("Folder")
-	    fakeFolder.Name = "PathfindNodes"
-	    fakeFolder.Parent = room
-	    fakeNode.Parent = fakeFolder
-        end
-end
+
+			for _, room in next, workspace.CurrentRooms:GetChildren() do
+				local pathfindNodes = room:FindFirstChild("PathfindNodes")
+
+				if pathfindNodes then
+					print("Found nodes")
+				else
+					local fakeNode = Instance.new("Part")
+					fakeNode.Name = "1"
+					fakeNode.CFrame = room:WaitForChild("RoomExit").CFrame - Vector3.new(0, room.RoomExit.Size.Y / 2, 0)
+					fakeNode.Anchored = true
+					fakeNode.Transparency = 1
+					local fakeFolder = Instance.new("Folder")
+					fakeFolder.Name = "PathfindNodes"
+					fakeFolder.Parent = room
+					fakeNode.Parent = fakeFolder
+				end
+			end
 
 			coroutine.wrap(function()
 				while Rushing do
-								-- sorry vynixu lol
-				    local CamShake = {
-        true, -- Enabled/Disabled
-        {2, 15, 0.1, .2}, -- Shake values (don't change if you don't know)
-        100, -- Shake start distance (from Entity to you)
-    }
-				            local shakeConfig = CamShake
-            local shakeMag = (getPlayerRoot().Position - RushNew.Position).Magnitude
+					-- sorry vynixu lol
+					local CamShake = {
+						true, -- Enabled/Disabled
+						{2, 15, 0.1, .2}, -- Shake values (don't change if you don't know)
+						100, -- Shake start distance (from Entity to you)
+					}
+					local shakeConfig = CamShake
+					local shakeMag = (getPlayerRoot().Position - RushNew.Position).Magnitude
 
-            if shakeConfig[1] and shakeMag <= shakeConfig[3] then
-                local shakeRep = {}
+					if shakeConfig[1] and shakeMag <= shakeConfig[3] then
+						local shakeRep = {}
 
-                for i, v in next, shakeConfig[2] do
-                    shakeRep[i] = v
-                end
-                shakeRep[1] = shakeConfig[2][1] / shakeConfig[3] * (shakeConfig[3] - shakeMag)
+						for i, v in next, shakeConfig[2] do
+							shakeRep[i] = v
+						end
+						shakeRep[1] = shakeConfig[2][1] / shakeConfig[3] * (shakeConfig[3] - shakeMag)
 
-                ModuleScripts.MainGame.camShaker.ShakeOnce(ModuleScripts.MainGame.camShaker, table.unpack(shakeRep))
-            end
+						ModuleScripts.MainGame.camShaker.ShakeOnce(ModuleScripts.MainGame.camShaker, table.unpack(shakeRep))
+					end
 					-- firesignal(game.ReplicatedStorage.Bricks.CamShakeRelative.OnClientEvent, RushNew.Position, 2, 15, 0.1, .2, Vector3.new(0,0,0))
 					if CanKill then
 						for i,v in pairs(game.Players:GetPlayers()) do
@@ -452,7 +452,7 @@ end
 			for _,Room in ipairs(workspace.CurrentRooms:GetChildren()) do
 				local IsPossible = true
 				local Last = workspace.CurrentRooms:FindFirstChild(tonumber(Room.Name) - 1)
-				
+
 				if Last then
 					if Last:FindFirstChild("PathfindNodes") then
 						if Last:GetAttribute("Done") == true then
@@ -460,11 +460,11 @@ end
 						end
 					end
 				end
-				
+
 				if Room:GetAttribute("Possible") == false then
 					IsPossible = false
 				end
-				
+
 				-- Next room operations
 				local Next = workspace.CurrentRooms:FindFirstChild(tonumber(Room.Name) + 1)
 
@@ -477,9 +477,9 @@ end
 						end
 					end
 				end
-				
+
 				if Room:FindFirstChild("PathfindNodes") and IsPossible then
-				        ModuleScripts.ModuleEvents.shatter(Room)
+					ModuleScripts.ModuleEvents.shatter(Room)
 					-- Event("breakLights", Room, 0.416, 60)
 					for i,v in pairs(Room.PathfindNodes:GetChildren()) do
 						SpawnerLibrary.Tween2(RushNew, v, RushSpeed, CFrame.new(0,4,0))
@@ -489,22 +489,22 @@ end
 			end
 
 			CanKill = false
-			
+
 			local Current = workspace.CurrentRooms:FindFirstChild(game.ReplicatedStorage.GameData.LatestRoom.Value)
-			
+
 			if Current:FindFirstChild("Door") then
 				Current.Door.ClientOpen:FireServer()
 			end
-			
+
 			Rushing = false
 
 			RushNew.CanCollide = false
 			RushNew.Anchored = false
-			
+
 			for i,v in pairs(workspace.CurrentRooms:GetChildren()) do
 				v:SetAttribute("Possible", true)
 			end
-			
+
 			con:Disconnect()
 		end,
 	},
@@ -513,26 +513,27 @@ end
 			local AmbushSpeed = (Args.Speed and Args.Speed) or 160
 			local CanKill = (Args.Kill and Args.Kill) or false
 			local WaitTime = (Args.Time and Args.Time) or 3
-			
+
 			ModuleScripts.ModuleEvents.flicker(workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value], .75)
 			-- Event("flickerLights", game.ReplicatedStorage.GameData.LatestRoom.Value, .75)
-			
+
 			task.wait(math.random(1,3))
 			workspace["Ambience_Ambush"]:Play()
-			
+
 			local Ambush = Instance.new("Model")
-			Ambush.Name = "RushMoving"
+			Ambush.Name = "AmbushMoving"
 
 			local RushNew = Create(loadstring(game:HttpGet("https://raw.githubusercontent.com/dreadmania/Scripts/main/Ambush.lua"))(), nil)
 			-- local RushNew = LoadCustomInstance("https://github.com/RegularVynixu/Utilities/blob/main/Doors%20Entity%20Spawner/Models/Ambush.rbxm?raw=true")
 			RushNew.Parent = Ambush
+			RushNew.Name = "RushNew"
 
 			Ambush.Parent = workspace
 			Ambush.PrimaryPart = RushNew
 
 			local Earliest, Latest = SpawnerLibrary.Calculate2()
 			Ambush:PivotTo(Earliest.PrimaryPart.CFrame)
-			
+
 			for i,v in pairs(Ambush:GetDescendants()) do
 				if v:IsA("Sound") then
 					v.SoundGroup = game.SoundService.Main
@@ -548,49 +549,58 @@ end
 					v:SetAttribute("Possible", true)
 				end
 			end)
-			
-			    for _, room in next, workspace.CurrentRooms:GetChildren() do
-        local pathfindNodes = room:FindFirstChild("PathfindNodes")
-        
-        if pathfindNodes then
-            print("Found nodes")
-        else
-            local fakeNode = Instance.new("Part")
-            fakeNode.Name = "1"
-            fakeNode.CFrame = room:WaitForChild("RoomExit").CFrame - Vector3.new(0, room.RoomExit.Size.Y / 2, 0)
-	    fakeNode.Anchored = true
-	    fakeNode.Transparency = 1
-            local fakeFolder = Instance.new("Folder")
-	    fakeFolder.Name = "PathfindNodes"
-	    fakeFolder.Parent = room
-	    fakeNode.Parent = fakeFolder
-        end
-end
+
+			for _, room in next, workspace.CurrentRooms:GetChildren() do
+				local pathfindNodes = room:FindFirstChild("PathfindNodes")
+
+				if pathfindNodes then
+					print("Found nodes")
+				else
+					local Path = game:GetService("PathfindingService"):CreatePath()
+					Path:ComputeAsync(RushNew.Position, room:WaitForChild("RoomExit").Position)
+					local waypoints = Path:GetWaypoints()
+					for i, point in ipairs(waypoints) do
+						local fakeNode = Instance.new("Part")
+						fakeNode.Name = i
+						fakeNode.Position = point.Position
+						fakeNode.Anchored = true
+						fakeNode.Transparency = 1
+						if not room:FindFirstChild("PathfindNodes") then
+							local fakeFolder = Instance.new("Folder")
+							fakeFolder.Name = "PathfindNodes"
+							fakeFolder.Parent = room
+							fakeNode.Parent = fakeFolder
+						else
+							fakeNode.Parent = room:WaitForChild("PathfindNodes")
+						end
+					end
+				end
+			end
 
 			coroutine.wrap(function()
 				while Rushing do
-				-- sorry vynixu lol
-				    local CamShake = {
-        true, -- Enabled/Disabled
-        {2, 15, 0.1, .5}, -- Shake values (don't change if you don't know)
-        100, -- Shake start distance (from Entity to you)
-    }
-				            local shakeConfig = CamShake
-            local shakeMag = (getPlayerRoot().Position - RushNew.Position).Magnitude
+					-- sorry vynixu lol
+					local CamShake = {
+						true, -- Enabled/Disabled
+						{2, 15, 0.1, .5}, -- Shake values (don't change if you don't know)
+						100, -- Shake start distance (from Entity to you)
+					}
+					local shakeConfig = CamShake
+					local shakeMag = (getPlayerRoot().Position - RushNew.Position).Magnitude
 
-            if shakeConfig[1] and shakeMag <= shakeConfig[3] then
-                local shakeRep = {}
+					if shakeConfig[1] and shakeMag <= shakeConfig[3] then
+						local shakeRep = {}
 
-                for i, v in next, shakeConfig[2] do
-                    shakeRep[i] = v
-                end
-                shakeRep[1] = shakeConfig[2][1] / shakeConfig[3] * (shakeConfig[3] - shakeMag)
+						for i, v in next, shakeConfig[2] do
+							shakeRep[i] = v
+						end
+						shakeRep[1] = shakeConfig[2][1] / shakeConfig[3] * (shakeConfig[3] - shakeMag)
 
-                ModuleScripts.MainGame.camShaker.ShakeOnce(ModuleScripts.MainGame.camShaker, table.unpack(shakeRep))
-            end
-				        -- local yes = (getPlayerRoot().Position - RushNew.Position).Magnitude
-				        -- ModuleScripts.MainGame.camShaker:ShakeOnce(yes, 15, 0.1, 0.5)
-				        -- ModuleScripts.MainGame.camShaker.ShakeOnce(RushNew.Position, 2, 15, 0.1, .5, Vector3.new(0,0,0))
+						ModuleScripts.MainGame.camShaker.ShakeOnce(ModuleScripts.MainGame.camShaker, table.unpack(shakeRep))
+					end
+					-- local yes = (getPlayerRoot().Position - RushNew.Position).Magnitude
+					-- ModuleScripts.MainGame.camShaker:ShakeOnce(yes, 15, 0.1, 0.5)
+					-- ModuleScripts.MainGame.camShaker.ShakeOnce(RushNew.Position, 2, 15, 0.1, .5, Vector3.new(0,0,0))
 					-- firesignal(game.ReplicatedStorage.Bricks.CamShakeRelative.OnClientEvent, RushNew.Position, 2, 15, 0.1, .5, Vector3.new(0,0,0))
 					if CanKill then
 						for i,v in pairs(game.Players:GetPlayers()) do
@@ -607,11 +617,11 @@ end
 				local Nodes = {}
 				for _,Room in ipairs(workspace.CurrentRooms:GetChildren()) do
 					local IsPossible = true
-					
+
 					if Room:GetAttribute("Possible") == false then
 						IsPossible = false
 					end
-					
+
 					-- Next room operations
 					local Next = workspace.CurrentRooms:FindFirstChild(tonumber(Room.Name) + 1)
 
@@ -626,7 +636,7 @@ end
 					end
 
 					if Room:FindFirstChild("PathfindNodes") and IsPossible then
-					        ModuleScripts.ModuleEvents.shatter(Room)
+						ModuleScripts.ModuleEvents.shatter(Room)
 						-- Event("breakLights", Room, 0.416, 60)
 						for i,v in pairs(Room.PathfindNodes:GetChildren()) do
 							table.insert(Nodes, 1, v)
@@ -635,11 +645,11 @@ end
 						SpawnerLibrary.Tween2(RushNew, Room.RoomExit, AmbushSpeed)
 					end
 				end
-				
+
 				for i,v in ipairs(Nodes) do
 					SpawnerLibrary.Tween2(RushNew, v, AmbushSpeed, CFrame.new(0,4,0))
 				end
-				
+
 				task.wait(math.random(1,3))
 			end
 
@@ -647,11 +657,11 @@ end
 			Rushing = false
 
 			Ambush:Destroy()
-			
+
 			for i,v in pairs(workspace.CurrentRooms:GetChildren()) do
 				v:SetAttribute("Possible", true)
 			end
-			
+
 			con:Disconnect()
 		end,
 	},
@@ -673,7 +683,7 @@ end
 	Jack = {
 		Func = function()
 			local Room = workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value]
-			
+
 			Event("tryp", workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value], 10) 
 
 			local Jack = Instance.new("Part", workspace)
@@ -878,9 +888,9 @@ end
 						if workspace:Raycast(Camera.CFrame.Position, Eyes.Position - Camera.CFrame.Position, Parameters) == nil then
 							game.Players.LocalPlayer.Character.Humanoid.Health -= Damage
 							if game.Players.LocalPlayer.Character.Humanoid.Health > 1 then
-                            ModuleScripts.MainGame.camShaker:ShakeOnce(15, 20, 0.1, 0.5)
-			    end
-		                                     SpawnerLibrary.Prepare({"You died to the Eyes again...", "They have a unique audio cue. Once you hear it, be prepared.", "Use their blue light to work out their location. Look away from them at all times."}, "Eyes")
+								ModuleScripts.MainGame.camShaker:ShakeOnce(15, 20, 0.1, 0.5)
+							end
+							SpawnerLibrary.Prepare({"You died to the Eyes again...", "They have a unique audio cue. Once you hear it, be prepared.", "Use their blue light to work out their location. Look away from them at all times."}, "Eyes")
 						end
 					end
 
@@ -888,15 +898,15 @@ end
 				end
 			end)()
 			game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
-			
+
 			Sound2:Stop()
-			
+
 			EyesParticle.Enabled = false
 			Spark.Enabled = false
-			
+
 			Light1:Destroy()
 			Light2:Destroy()
-			
+
 			task.wait(5)
 			Eyes:Destroy()
 		end,
